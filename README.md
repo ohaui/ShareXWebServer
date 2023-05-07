@@ -7,6 +7,7 @@ This is a C# implementation of a ShareX server, which allows you to upload files
 
 - URL shortening
 - Text uploading
+- Various files uploading
 
 ## Not implemented
 - A lot of things 
