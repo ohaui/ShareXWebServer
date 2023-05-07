@@ -1,4 +1,5 @@
 using Microsoft.AspNetCore.Http.Extensions;
+using Microsoft.EntityFrameworkCore;
 using ShareXWebClient.Data;
 
 namespace ShareXWebClient.Middleware;
@@ -17,7 +18,7 @@ public class RedirectMiddleware
     public async Task InvokeAsync(HttpContext httpContext, ApplicationContext context)
     {
         var query = httpContext.Request.GetDisplayUrl();
-        var link = context.Links.FirstOrDefault(x => x.Value == query);
+        var link = await context.Links.FirstOrDefaultAsync(x => x.Value == query);
 
         if (link != default)
         {

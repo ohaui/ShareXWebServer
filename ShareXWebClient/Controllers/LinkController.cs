@@ -7,12 +7,10 @@ namespace ShareXWebClient.Controllers;
 
 public class LinkController : BaseAPIController
 {
-    private readonly ApplicationContext _db;
     private readonly ILinkService _service;
 
-    public LinkController(ApplicationContext db, ILinkService service)
+    public LinkController( ILinkService service)
     {
-        _db = db;
         _service = service;
     }
 

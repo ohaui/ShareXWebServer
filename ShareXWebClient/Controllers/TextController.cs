@@ -1,19 +1,16 @@
 using Microsoft.AspNetCore.Mvc;
-using ShareXWebClient.Data;
 using ShareXWebClient.Interfaces.Service;
 using ShareXWebClient.Models.Query;
-using ShareXWebClient.Services;
+using ShareXWebClient.Utils;
 
 namespace ShareXWebClient.Controllers;
 
 public class TextController : BaseAPIController
 {
-    private readonly ApplicationContext _db;
     private readonly ITextService _service;
 
-    public TextController(ApplicationContext db, ITextService service)
+    public TextController(ITextService service)
     {
-        _db = db;
         _service = service;
     }
 
@@ -28,7 +25,7 @@ public class TextController : BaseAPIController
         if (!response.Success)
             return BadRequest(response.Message);
 
-        return Ok($"http://localhost:5179/api/Text/{response.Resource.PublicId}");
+        return Ok($"{Settings.BaseURL}/api/Text/{response.Resource.PublicId}");
     }
 
     [HttpGet("{id}")]

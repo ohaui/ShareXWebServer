@@ -4,6 +4,7 @@ using ShareXWebClient.Interfaces.Service;
 using ShareXWebClient.Models;
 using ShareXWebClient.Models.Query;
 using ShareXWebClient.Models.Response;
+using ShareXWebClient.Utils;
 
 namespace ShareXWebClient.Services;
 
@@ -27,12 +28,12 @@ public class LinkService : ILinkService
             return new LinkResponse(isLinkContains);
         }
         
-        string newLink = $"http://localhost:5179/{Guid.NewGuid().ToString()[24..]}";
+        string newLink = $"{Settings.BaseURL}/{Guid.NewGuid().ToString()[24..]}";
         
         //there is still a possibility that it won't create a free one, but it's ok
         if (await _db.Links.FirstOrDefaultAsync(x => x.Value == newLink) != null)
         {
-            newLink = $"http://localhost:5179/{Guid.NewGuid().ToString()[24..]}";
+            newLink = $"{Settings.BaseURL}/{Guid.NewGuid().ToString()[24..]}"; 
         }
 
         var resLink = new Link
